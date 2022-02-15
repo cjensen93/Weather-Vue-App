@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.JS Weather App Plan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="white shadowed stuff-box">
+    <h1>Vue.JS Weather App Plan</h1>
+</div>
+<br>
+
+<div class="red shadowed stuff-box">
+    <h2>Time Spent On Assignment</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Brief Summary</th>
+            <th>Time Spent</th>
+        </tr>
+        <tr>
+            <td>November 30th</td>
+            <td>Worked on plan, started getting APIs to return data</td>
+            <td>2 Hours</td>
+        </tr>
+        <tr>
+            <td>December 2nd</td>
+            <td>Parsed JSON data, created current and forecasted divs</td>
+            <td>5 Hours</td>
+        </tr>
+        <tr>
+            <td>December 3rd</td>
+            <td>Got 'unlikely - neutral - likely' counter working</td>
+            <td>2 Hours</td>
+        </tr>
+
+    </table>
+</div>
+<br>
+
+<div class="blue shadowed stuff-box">
+    <h2>index.html</h2>
+    <p>This website will be very simple, when it comes down to it. It will make 3 different API calls, and based off
+    of the data it returns, will populate the entire site. The website will all be contained inside different if-else
+    divs, depending on if the different data fields are populated by the APIs.</p>
+
+    <p>First, I will be testing out my API calls on their own, to make sure I am able to retrieve the correct
+    information. Here's the API keys that I will use:</p>
+
+    <ul>
+        <li>IP Address API: <code>https://api.freegeoip.app/json/?apikey=5dd73610-531f-11ec-81be-8d8e0748abd7</code></li>
+        <li>Current Weather API: <code>https://api.openweathermap.org/data/2.5/weather?lat=(latitude}&lon={longitude}&units=imperial&appid={APIKey}</code></li>
+        <li>Forecast Weather API: <code>https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&units=imperial&appid={APIKey}</code></li>
+    </ul>
+
+    <p>The API calls will be nested in the way the professor showed us in his Fantasy Character website. They'll be
+    called one at a time, with the first one being the original 'fetch', and the subsequent ones being called in the
+    'return' of the previous fetch call. </p>
+</div>
+
+<div class="green shadowed stuff-box">
+    <h2>Current Location div</h2>
+    <p>This div will be a 'v-if' and 'v-else' type. It will depend on if the API has filled a variable with its JSON
+    data. If the variable type is still equal to 'undefined', it will load the div to say something like "fetching your
+    current location". This div will pop up initially with the "fetching data" message, because the variable will be
+    initialized as undefined. But, shortly after, the API will obtain the IP information, and the div will change to
+    its 'v-else' state. In this state, the div will display the users country, region name, city, and the users
+    longitude and latitude. This information will help the next section run.</p>
+</div>
+
+<div class="yellow shadowed stuff-box">
+    <h2>Current Weather div</h2>
+    <p>This div will also be a 'v-if' and 'v-else' type. It will depend on the API being able to use the returned
+    longitude and latitude to get the users weather based off of their current location. To start off, the div will
+    display something like "obtaining your current weather data". But, like the first div, this div will load the data
+    from API, and the div will change to its 'v-else' state. In this state, the div will display a lot of information
+    gathered from the API. These include the current temp, the day's low and the day's high, its humidity, its pressure,
+    its sunrise, and its sunset.</p>
+</div>
+
+<div class="cyan shadowed stuff-box">
+    <h2>Forecast Weather div</h2>
+    <p>This div will also be a 'v-if' and 'v-else' type. The API will return a similar data set as the last one, from
+    the same website. But this data set will be not just for the current forecast, but for 40 forecasts in 3 hour
+    intervals over the next 5 days. This div will start in its 'v-if' state, because the variable it depends on will
+    be initialized as 'undefined'. But once the API load the data, it will switch to its 'v-else' state. Inside this
+    div will be a 'v-for' loop based on the length of the 40 forecasts return (which, obviously, will be 40). For each
+    of these divs that are created, it will be given a "data-idx" property that will match the iteration the loop is
+    currently in. This will be used to access the location in the data set list. Inside each div, we will focus on
+    displaying the forecasts date/time, its temperature, its description, its humidity, and its pressure.</p>
+</div>
+
+<div class="magenta shadowed stuff-box">
+    <h2>Voting System</h2>
+    <p>At the top of the "Forecast Weather" div, I'll create three "h3" elements that are lined up side by side. The
+    first will track the 'unlikely' votes, and will be colored red. The second will track the 'neutral' votes, and be
+    colored grey. The last will track the 'likely' votes, and will be colored green.</p>
+
+    <p>Inside the Vue app that is created, three of the variables that will be passed in the "data" function will be
+    used to track the current values of the votes. Because the website will default to all the divs and votes being
+    neutral and grey, the red and green counters will be 0, and the grey counter will be 40. From here, inside the
+    function that cycles between the div colors, will also be a function that increases the color that is switched to
+    by one, and decreases the color it was switched from by one. These variables will be tracked withing the 'computed'
+    section of the Vue app, so every time the website changes, it will track it and update the variable inside the 'h3'
+    element to the user.</p>
+</div>
+
+<div class="black shadowed stuff-box">
+    <h2>Vue App</h2>
+    <p>This app will follow fairly closely to the tutorial 'TODO' app that was shown by the professor. It will have a
+    'data()' section, a methods section, a computed section, and a created section. At the end, the app will be mounted
+    to the 'div' that contains all the elements of the body. The created section will be a little longer, as described
+    earlier in the plan. The different API calls will be nested inside  each other, to avoid the "hadouken" style calls.</p>
+</div>
+</body>
+</html>
